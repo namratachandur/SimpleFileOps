@@ -5,12 +5,13 @@ public class FileAnalyzer
 {
     public static void main(String[] args) 
     {
-        Scanner input = new Scanner(System.in);
+        Scanner input = new Scanner(System.in); 
         System.out.print("Enter a filename: ");
         String filename = input.nextLine();
 
         try 
         {
+            // Check if filename is empty
             if (filename.trim().isEmpty()) 
             {
                 throw new EmptyFileNameException("Filename cannot be empty");
@@ -19,6 +20,7 @@ public class FileAnalyzer
             File file = new File(filename);
             if (!file.exists()) 
             {
+                // Check if file exists
                 throw new FileNotFoundException("File not found: " + filename);
             }
 
@@ -39,7 +41,7 @@ public class FileAnalyzer
                 }
             }
 
-            // Display results
+            // Display results to console
             System.out.println("File analysis results:");
             System.out.println("Lines: " + lineCount);
             System.out.println("Words: " + wordCount);
@@ -60,14 +62,17 @@ public class FileAnalyzer
             }
 
         } 
+        // Handle custom exception for empty filename
         catch (EmptyFileNameException e) 
         {
             System.err.println("Error: " + e.getMessage());
-        } 
+        }
+        // Handle file not found exception 
         catch (FileNotFoundException e) 
         {
             System.err.println("Error: " + e.getMessage());
         } 
+        // Handle IO exceptions for file reading
         catch (IOException e) 
         {
             System.err.println("Error reading file: " + e.getMessage());
